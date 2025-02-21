@@ -149,11 +149,54 @@ const ProdDiscountTag = styled.p`
   }
 `;
 
+const ProductQuantityWrapper = styled.div`
+  color: #3F3F46;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+  background: #F4F4F5;
+  border-radius: 40px;
+  padding: 4px 14px;
+  margin-top: 12px;
+
+  button {
+    color: #3F3F46;
+  }
+`;
+
+const QuantityInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 183px;
+  background: #FFFFFF;
+  border: none;
+  padding: 8px 0;
+  border-radius: 24px;
+
+  input {
+    max-width: 25px;
+    color: #52525B;
+    text-align: center;
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0; 
+    }
+  }    
+`;
+
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  // Get cart item quantity
+  const quantity = useSelector(selectProductQuantity(product.id));
+
   const [discountPrice, setDiscountPrice] = useState<number>();
   const [discountPriceDec, setDiscountPriceDec] = useState<number>();
   const [installmentPrice, setInstallmentPrice] = useState<string>();
-  const [productQuantity, setProductQuantity] = useState<number>(0);
+  const [productQuantity, setProductQuantity] = useState<number>(quantity);
 
   useEffect(() => {
     if (product.price) {
@@ -173,8 +216,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   }, [product.price]);
 
-  // Get cart item quantity
-  const quantity = useSelector(selectProductQuantity(product.id));
   const dispatch = useDispatch();
   
   const handleAddToCart = useCallback(() => {
@@ -188,14 +229,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleRemoveToCart = useCallback(() => {
       const addProduct = Object.assign(product, { quantity: 1 });
       dispatch(removeItem(addProduct));
-      setProductQuantity(productQuantity - 1)
+      setProductQuantity(0)
     },
-    [dispatch, product, productQuantity]
+    [dispatch, product]
   );
 
   const handleUpdateQuantity = useCallback((element: React.FormEvent<HTMLInputElement>) => {
       const newQuantity = parseInt(element.currentTarget.value)
       const addProduct = Object.assign(product, { quantity: newQuantity });
+
+      if (newQuantity === null || newQuantity === 0) {
+        dispatch(removeItem(addProduct));
+      }
+
       dispatch(updateQuantity(addProduct));
       setProductQuantity(newQuantity)
     },
@@ -231,19 +277,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </ProductPriceWrapper>
       
       {quantity > 0 ? (
-        // <Button onClick={handleRemoveToCart}>
-        <div>
+        <ProductQuantityWrapper>
           <button onClick={handleRemoveToCart}>
-            <FontAwesomeIcon icon={faTrashCan} size="1x" color="#3F3F46" />
+            <FontAwesomeIcon icon={faTrashCan} size="1x" />
           </button>
-          <div>
-            <FontAwesomeIcon icon={faCartShopping} size="1x" color="#3F3F46" />
+          <QuantityInputWrapper>
+            <FontAwesomeIcon icon={faCartShopping} size="1x" />
             <input type="number" value={productQuantity} onChange={handleUpdateQuantity} />
-          </div>
+          </QuantityInputWrapper>
           <button onClick={handleAddToCart}>
-            <FontAwesomeIcon icon={faPlus} size="1x" color="#3F3F46" />
+            <FontAwesomeIcon icon={faPlus} size="1x" />
           </button>
-        </div>
+        </ProductQuantityWrapper>
       ) : (
         <Button onClick={quantity > 3 ? handleRemoveToCart : handleAddToCart}>
           <img src={cartArrowDown} alt="" />

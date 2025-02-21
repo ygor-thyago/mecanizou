@@ -75,12 +75,8 @@ const cartSlice = createSlice({
     },
     removeItem: (state, action: PayloadAction<CartItem>) => {
       const product = action.payload;
-      const existingItem = state.items.find((item) => item.id === product.id);
-
-      if (existingItem) {
-        existingItem.quantity -= 1;
-      }
-
+      state.items = state.items.filter((item) => item.id !== product.id);
+      
       state.totalAmount = state.items.reduce((total, item) => total + item.price * item.quantity, 0);
       state.isMiniCartOpen = true;
       state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
