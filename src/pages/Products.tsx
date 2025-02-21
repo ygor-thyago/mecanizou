@@ -4,7 +4,7 @@ import axios from "axios";
 import ContentLoader from "react-content-loader"
 import Container from "../components/Container";
 import Breadcrumb from "../components/Breadcrumb";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/UI/ProductCard";
 import Pagination from "../components/Pagination";
 
 interface Product {
