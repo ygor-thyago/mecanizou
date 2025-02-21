@@ -11,3 +11,6 @@ export interface MiniCartState {
   totalAmount: number;
   isMiniCartOpen: boolean;
 }
+
+// export interface MiniCartProps {
+// }
