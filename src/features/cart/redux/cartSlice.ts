@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../store";
+import { RootState } from "../../../store";
 
-interface CartItem {
+export interface CartItem {
   image: string;
   id: number;
   title: string;
@@ -9,7 +9,7 @@ interface CartItem {
   quantity: number;
 }
 
-interface CartState {
+export interface CartState {
   items: CartItem[];
   totalAmount: number;
   isMiniCartOpen: boolean;

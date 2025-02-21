@@ -26,7 +26,7 @@ const MiniCart = () => {
         <CartHeader>
           <strong>Itens no Carrinho</strong>
 
-          <CloseMobileCart onClick={closeMiniCart}>
+          <CloseMobileCart aria-label='fechar' onClick={closeMiniCart}>
             <FontAwesomeIcon icon={faXmark} size="lg"/>
           </CloseMobileCart>
 
