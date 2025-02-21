@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import HeaderSearch from "../components/HeaderSearch";
-import MainNav from "../components/MainNav";
-import Container from "../components/Container";
-import MegaMenu from "../components/MegaMenu";
-import logo from "../assets/logo.svg";
-import helpIcon from "../assets/help-icon.svg";
+import HeaderSearch from "../HeaderSearch";
+import MainNav from "../MainNav";
+import Container from "../Container";
+import MegaMenu from "../MegaMenu";
+import logo from "../../assets/logo.svg";
+import helpIcon from "../../assets/help-icon.svg";
 
 const HeaderWrapper = styled.header`
   color: white;

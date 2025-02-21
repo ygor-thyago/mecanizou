@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProductQuantity, addItem, removeItem, updateQuantity } from "../../features/Cart/cartSlice";
+import { selectProductQuantity, addItem, removeItem, updateQuantity } from "../../features/cart/redux/cartSlice";
 import { useCallback, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBolt, faTrashCan, faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
-import cartArrowDown from "../assets/cart-arrow-down.svg";
+import cartArrowDown from "../../assets/cart-arrow-down.svg";
 import Button from "./Button";
 
 interface ProductCardProps {

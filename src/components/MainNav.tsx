@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
-import { toggleMiniCart } from "../features/Cart/cartSlice";
-import MiniCart from "../features/Cart/MiniCart";
+import { toggleMiniCart } from "../features/cart/redux/cartSlice";
+import MiniCart from "../features/cart/components/MiniCart";
 import cartIcon from "../assets/cart-icon.svg";
 import cartFilledIcon from "../assets/cart-filled-icon.svg";
 import userIcon from "../assets/user-icon.svg";
