@@ -68,7 +68,7 @@ const UserMenu = styled.div`
 function MainNav() {
   const dispatch = useDispatch();
   const { totalItems, isMiniCartOpen } = useSelector((state: RootState) => state.cart);
-  const [totalCart, setTotalCArt] = useState(totalItems);
+  const [totalCart, setTotalCArt] = useState<number>(totalItems);
 
   const toggleModalCart = useCallback(() => {
     dispatch(toggleMiniCart(isMiniCartOpen ? false : true)); // Toggle minicart modal

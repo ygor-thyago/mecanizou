@@ -20,7 +20,7 @@ const PaginationWrapper = styled.div`
   }
 `;
 
-const PageButton = styled.button<{ active?: boolean; disabled?: boolean }>`
+const PageButton = styled.button<{ $isActive?: boolean; disabled?: boolean }>`
   display: flex;
   align-items: center;
   gap: 15px;
@@ -29,7 +29,7 @@ const PageButton = styled.button<{ active?: boolean; disabled?: boolean }>`
   font-size: 14px;
   font-weight: 500;
   padding: 8px 12px;
-  border: ${({ active }) => (active ? "1px solid #E4E4E7" : "none")};
+  border: ${({ $isActive }) => ($isActive ? "1px solid #E4E4E7" : "none")};
   cursor: pointer;
 
   @media only screen and (max-width: 768px) {
@@ -68,7 +68,7 @@ const Pagination: React.FC<PaginationProps> = ({
       {pages.map((page, index) => (
         <PageButton
           key={index}
-          active={page === currentPage}
+          $isActive={page === currentPage}
           onClick={() => onPageChange(Number(page))}
         >
           {page}

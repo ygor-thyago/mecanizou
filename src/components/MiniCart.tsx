@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useCallback, useEffect } from "react";
-import { useAnimate, stagger, motion } from "framer-motion";
+import { useAnimate, stagger, motion, useReducedMotion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import cartBlueIcon from "../assets/cart-blue-icon.svg";
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { toggleMiniCart } from "../features/cart/cartSlice";
 
-const MiniCartWrapper = styled.div<{ active?: boolean }>`
+const MiniCartWrapper = styled.div<{ $isActive?: boolean }>`
   top: 48px;
   left: 5px;
   position: absolute;
@@ -26,9 +26,9 @@ const MiniCartWrapper = styled.div<{ active?: boolean }>`
     transform-origin: top;
     border-radius: 2px;
     z-index: -1;
-    transition: all linear ${({ active }) => (active ? ".2s" : "0s")};
-    transition-delay: ${({ active }) => (active ? ".3s" : "0s")};
-    opacity: ${({ active }) => (active ? "1" : "0")};
+    transition: all linear ${({ $isActive }) => ($isActive ? ".2s" : "0s")};
+    transition-delay: ${({ $isActive }) => ($isActive ? ".3s" : "0s")};
+    opacity: ${({ $isActive }) => ($isActive ? "1" : "0")};
   }
 
   @media only screen and (max-width: 1024px) {
@@ -45,7 +45,7 @@ const MiniCartWrapper = styled.div<{ active?: boolean }>`
     position: fixed;
     top: 0;
     right: auto;
-    left: ${({ active }) => (active ? "0" : "-150%")};
+    left: ${({ $isActive }) => ($isActive ? "0" : "-150%")};
     transition: all linear .3s;
     background-color: #FFF;
     
@@ -202,8 +202,11 @@ const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
 
 function useMenuAnimation(isOpen: boolean) {
   const [scope, animate] = useAnimate();
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
+    if (shouldReduceMotion) return; 
+
     animate(
       "div#mini-cart",
       {
@@ -245,7 +248,7 @@ const MiniCart = () => {
   return (
     <MiniCartWrapper
       ref={scope}
-      active={isMiniCartOpen}
+      $isActive={isMiniCartOpen}
     >
       <MiniCartContainer id="mini-cart">
         <CartHeader>

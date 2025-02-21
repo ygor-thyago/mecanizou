@@ -42,7 +42,7 @@ const MegaNav = styled.nav`
   }
 `;
 
-const MegaList = styled.ul<{ active?: boolean }>`
+const MegaList = styled.ul<{ $isActive?: boolean }>`
   display: flex;
   align-items: center;
   gap: 24px;
@@ -59,14 +59,14 @@ const MegaList = styled.ul<{ active?: boolean }>`
     padding: 0;
     z-index: 99;
     box-shadow: 0px 10px 12px -6px #0000001F;
-    height: ${({ active }) => (active ? "285px" : "0px")};
-    visibility: ${({ active }) => (active ? "visible" : "hidden")};
+    height: ${({ $isActive }) => ($isActive ? "285px" : "0px")};
+    visibility: ${({ $isActive }) => ($isActive ? "visible" : "hidden")};
     transition: all linear .5s;
 
     li {
-      opacity: ${({ active }) => (active ? "1" : "0")};
-      transition: all linear ${({ active }) => (active ? ".2s" : "0")};
-      transition-delay: ${({ active }) => (active ? ".5s" : "0s")};
+      opacity: ${({ $isActive }) => ($isActive ? "1" : "0")};
+      transition: all linear ${({ $isActive }) => ($isActive ? ".2s" : "0")};
+      transition-delay: ${({ $isActive }) => ($isActive ? ".5s" : "0s")};
     }
   }
 `;
@@ -128,7 +128,7 @@ const QuoteIcon = styled.img`
 `;
 
 function MegaMenu() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
   const toggleMobileOpen = useCallback(() => {
     setMobileOpen(!mobileOpen)
@@ -142,7 +142,7 @@ function MegaMenu() {
           <FontAwesomeIcon icon={faBars} size="lg"/>
         </ToggleMegaNav>
         <MegaNav>
-          <MegaList active={mobileOpen}>
+          <MegaList $isActive={mobileOpen}>
             <MegaItem>
               Todas as Categorias
               <FontAwesomeIcon icon={faAngleDown} size="lg"/>

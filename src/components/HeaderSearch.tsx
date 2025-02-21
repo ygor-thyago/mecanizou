@@ -29,7 +29,7 @@ const SearchIcon = styled.img`
   display: block;
 `;
 
-const SearchInput = styled.input<{ active?: boolean }>`
+const SearchInput = styled.input<{ $isActive?: boolean }>`
   width: calc(100% - 48px);
   color: #fff;
   font-family: Inter;
@@ -54,8 +54,8 @@ const SearchInput = styled.input<{ active?: boolean }>`
     z-index: 99;
     padding: 15px;
     background: #0860c4;
-    opacity: ${({ active }) => (active ? "1" : "0")};
-    visibility: ${({ active }) => (active ? "visible" : "hidden")};
+    opacity: ${({ $isActive }) => ($isActive ? "1" : "0")};
+    visibility: ${({ $isActive }) => ($isActive ? "visible" : "hidden")};
     transition: all linear .5s;
   }
 `;
@@ -71,7 +71,7 @@ function HeaderSearch() {
       <SearchButton onClick={toggleMobileOpen}>
         <SearchIcon src={searchIcon} alt="Buscar Produto" />
       </SearchButton>
-      <SearchInput active={mobileOpen} placeholder="Busque por produto, termo ou código" />
+      <SearchInput $isActive={mobileOpen} placeholder="Busque por produto, termo ou código" />
     </SearchBox>
   );
 }

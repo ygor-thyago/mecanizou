@@ -18,7 +18,7 @@ const BreadcrumbWrapper = styled.nav`
   }
 `;
 
-const BreadcrumbItem = styled.span<{ isLast?: boolean }>`
+const BreadcrumbItem = styled.span<{ $isLast?: boolean }>`
   display: flex;
   align-items: center;
   a {
@@ -28,7 +28,7 @@ const BreadcrumbItem = styled.span<{ isLast?: boolean }>`
       text-decoration: underline;
     }
   }
-  ${({ isLast }) => isLast && "font-weight: bold; color: #27272A;"}
+  ${({ $isLast }) => $isLast && "font-weight: bold; color: #27272A;"}
 `;
 
 const Separator = styled.span`
@@ -39,7 +39,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
   return (
     <BreadcrumbWrapper>
       {items.map((item, index) => (
-        <BreadcrumbItem key={index} isLast={index === items.length - 1}>
+        <BreadcrumbItem key={index} $isLast={index === items.length - 1}>
           {item.link ? <Link to={item.link}>{item.label}</Link> : item.label}
           {index < items.length - 1 && <Separator><FontAwesomeIcon icon={faAngleRight} size="2xs" color="#71717A" /></Separator>}
         </BreadcrumbItem>
