@@ -18,11 +18,40 @@ const HeaderContainer = styled(Container)`
   align-items: center;
   justify-content: flex-start;
   gap: 32px;
+  
+  @media only screen and (max-width: 1024px) {
+    gap: 15px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    position: relative;
+  }
+
+  @media only screen and (max-width: 426px) {
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 `;
+
+const LogoWrapper = styled.div`
+  @media only screen and (max-width: 426px) {
+    text-align: center;
+    width: 100%;
+  }
+`;
+
 
 const Logo = styled.img`
   width: 184px;
   height: 20px;
+
+  @media only screen and (max-width: 1024px) {
+    width: 130px;
+    height: auto;
+  }
+  @media only screen and (max-width: 426px) {
+    width: 200px;
+  }
 `;
 
 const HelpIcon = styled.img`
@@ -34,7 +63,9 @@ function Header() {
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <Logo src={logo} alt="Mecanizou | Logo" loading="lazy" />
+        <LogoWrapper>
+          <Logo src={logo} alt="Mecanizou | Logo" loading="lazy" />
+        </LogoWrapper>
         <HeaderSearch />
         <MainNav />
         <HelpIcon src={helpIcon} alt="Ajuda" loading="lazy" />

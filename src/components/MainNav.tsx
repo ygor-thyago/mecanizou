@@ -11,12 +11,20 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { useCallback, useEffect, useState } from "react";
 
 const MainWrapper = styled.div`
-  width: 55%;
   max-width: 256px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+
+  @media only screen and (max-width: 1024px) {
+    width: auto;
+    margin-left: auto;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    margin-left: 0;
+  }
 `;
 
 const CartMenu = styled.div`
@@ -36,11 +44,17 @@ const MainIcon = styled.img`
   height: 20px;
 `;
 
-const MainNavText = styled.span`
+const MainCartText = styled.span`
   color: #e4e4e7;
   font-size: 14px;
   line-height: 23.8px;
   text-align: center;
+`;
+
+const MainNavText = styled(MainCartText)`
+  @media only screen and (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 const UserMenu = styled.div`
@@ -73,7 +87,7 @@ function MainNav() {
     <MainWrapper>
       <CartMenu onClick={toggleModalCart}>
         <MainIcon src={(totalCart > 0 ? cartFilledIcon : cartIcon)} alt="Ícone do Carrinho de Produtos" />
-        <MainNavText>{totalCart}</MainNavText>
+        <MainCartText>{totalCart}</MainCartText>
         <MiniCart />
       </CartMenu>
 

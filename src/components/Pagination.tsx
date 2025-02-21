@@ -14,6 +14,10 @@ const PaginationWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 8px;
+
+  @media only screen and (max-width: 768px) {
+    gap: 4px;
+  }
 `;
 
 const PageButton = styled.button<{ active?: boolean; disabled?: boolean }>`
@@ -27,6 +31,11 @@ const PageButton = styled.button<{ active?: boolean; disabled?: boolean }>`
   padding: 8px 12px;
   border: ${({ active }) => (active ? "1px solid #E4E4E7" : "none")};
   cursor: pointer;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
 `;
 
 const Pagination: React.FC<PaginationProps> = ({

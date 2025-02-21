@@ -17,7 +17,9 @@ interface ProductCardProps {
   };
 }
 
-const ProductWrapper = styled.div``;
+const ProductWrapper = styled.div`
+  max-width: 271px;
+`;
 
 const ProductImageWrapper = styled.div`
   display: flex;

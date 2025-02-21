@@ -12,6 +12,10 @@ const BreadcrumbWrapper = styled.nav`
   align-items: center;
   font-size: 14px;
   padding: 7px 0;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const BreadcrumbItem = styled.span<{ isLast?: boolean }>`

@@ -1,9 +1,12 @@
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAnimate, stagger, motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import cartBlueIcon from "../assets/cart-blue-icon.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { toggleMiniCart } from "../features/cart/cartSlice";
 
 const MiniCartWrapper = styled.div<{ active?: boolean }>`
   top: 48px;
@@ -27,6 +30,27 @@ const MiniCartWrapper = styled.div<{ active?: boolean }>`
     transition-delay: ${({ active }) => (active ? ".3s" : "0s")};
     opacity: ${({ active }) => (active ? "1" : "0")};
   }
+
+  @media only screen and (max-width: 1024px) {
+    left: auto;
+    right: 0;
+
+    &::before {
+      right: 29px;
+      left: auto;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    right: auto;
+    left: ${({ active }) => (active ? "0" : "-150%")};
+    transition: all linear .3s;
+    background-color: #FFF;
+    
+    &::before {display: none;}
+  }
 `;
 
 const MiniCartContainer = styled(motion.div)`
@@ -36,9 +60,16 @@ const MiniCartContainer = styled(motion.div)`
   box-shadow: 0px 10px 12px -6px #0000001F;
   display: flex;
   flex-direction: column;
+  clip-path: inset(10% 50% 90% round 10px);
+
+  @media only screen and (max-width: 768px) {
+    border-radius: 0;
+    height: 100vh;
+    clip-path: none;
+  }
 `;
 
-const Header = styled.div`
+const CartHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,6 +82,16 @@ const Header = styled.div`
   strong {
     font-weight: 600;
     color: #27272A;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    flex-wrap: wrap;
+
+    p {
+      width: 100%;
+      margin-top: 20px;
+      text-align: right;
+    }
   }
 `;
 
@@ -143,10 +184,18 @@ const Footer = styled.div`
   }
 `;
 
-
 const MiniCartIcon = styled.img`
   width: 20px;
   height: 20px;
+`;
+
+const CloseMobileCart = styled.button`
+  display: none;
+  color: #52525b;
+
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
 `;
 
 const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
@@ -187,6 +236,11 @@ function useMenuAnimation(isOpen: boolean) {
 const MiniCart = () => {
   const { items, totalAmount, isMiniCartOpen } = useSelector((state: RootState) => state.cart);
   const scope = useMenuAnimation(isMiniCartOpen);
+  const dispatch = useDispatch();
+
+  const toggleModalCart = useCallback(() => {
+    dispatch(toggleMiniCart(isMiniCartOpen ? false : true)); // Toggle minicart modal
+  },[dispatch, isMiniCartOpen],)
 
   return (
     <MiniCartWrapper
@@ -194,13 +248,17 @@ const MiniCart = () => {
       active={isMiniCartOpen}
     >
       <MiniCartContainer id="mini-cart">
-        <Header>
+        <CartHeader>
           <strong>Itens no Carrinho</strong>
+
+          <CloseMobileCart onClick={toggleModalCart}>
+            <FontAwesomeIcon icon={faXmark} size="lg"/>
+          </CloseMobileCart>
 
           {items.length > 0 && (
               <p>R$ {totalAmount.toFixed(2)}</p>
           )}
-        </Header>
+        </CartHeader>
 
         <CartList>
           {items.length === 0 ? (

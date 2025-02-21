@@ -21,29 +21,40 @@ const ProductListHead = styled.div`
   justify-content: space-between;
   padding: 18px 0 22px;
   border-bottom: 1px solid #e4e4e7;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const ProductListTitle = styled.h1`
   font-weight: 400;
   font-size: 24px;
   line-height: 31.68px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 18px;
+    line-height: auto;
+  }
 `;
 
 const ProductListNumb = styled.p`
   font-size: 14px;
   line-height: 19.6px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const ProductList = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 32px;
   padding-top: 26px;
-
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(271px, 1fr));
+  justify-items: center;
 `;
 
 const ProductListFooter = styled(ProductListHead)`
@@ -51,6 +62,12 @@ const ProductListFooter = styled(ProductListHead)`
   border-top: 1px solid #e4e4e7;
   margin-top: 33px;
   padding: 24px 0;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
 `;
 
 function Products() {

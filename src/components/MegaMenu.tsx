@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { useCallback, useState } from "react";
 import Container from "../components/Container";
 import quickQuoteIcon from "../assets/quick-quote-icon.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faBars } from "@fortawesome/free-solid-svg-icons";
 
 const MegaWrapper = styled.div`
   width: 100%;
@@ -14,18 +15,60 @@ const MegaContainer = styled(Container)`
   align-items: center;
   justify-content: space-between;
   padding: 12px ${({ theme }) => theme.spacing.large};
+
+  @media only screen and (max-width: 1024px) {
+    padding: 12px 15px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    position: relative;
+  }
+`;
+
+const ToggleMegaNav = styled.button`
+  display: none;
+  color: #52525b;
+
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
 `;
 
 const MegaNav = styled.nav`
   width: 80%;
   max-width: 700px;
+  @media only screen and (max-width: 768px) {
+    width: 0;
+  }
 `;
 
-const MegaList = styled.ul`
+const MegaList = styled.ul<{ active?: boolean }>`
   display: flex;
   align-items: center;
   gap: 24px;
   list-style: none;
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    left: 0%;
+    top: 100%;
+    position: absolute;
+    background-color: #fff;
+    padding: 0;
+    z-index: 99;
+    box-shadow: 0px 10px 12px -6px #0000001F;
+    height: ${({ active }) => (active ? "285px" : "0px")};
+    visibility: ${({ active }) => (active ? "visible" : "hidden")};
+    transition: all linear .5s;
+
+    li {
+      opacity: ${({ active }) => (active ? "1" : "0")};
+      transition: all linear ${({ active }) => (active ? ".2s" : "0")};
+      transition-delay: ${({ active }) => (active ? ".5s" : "0s")};
+    }
+  }
 `;
 
 const MegaItem = styled.li`
@@ -36,6 +79,22 @@ const MegaItem = styled.li`
   display: flex;
   align-items: center;
   gap: 9px;
+
+  @media only screen and (max-width: 1024px) {
+    gap: 4px;
+    max-width: 90px;
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    max-width: none;
+    padding: 0 15px 15px;
+
+    &:first-child {
+      padding-top: 15px;
+    }
+  }
 `;
 
 const QuickQuote = styled.button`
@@ -51,39 +110,58 @@ const QuickQuote = styled.button`
   border-radius: 100px;
   border: 1px solid #e4e4e7;
   padding-right: 5px;
+
+  @media only screen and (max-width: 1024px) {
+    font-size: 12px;
+  }
 `;
 
 const QuoteIcon = styled.img`
   width: 20px;
   height: 20px;
   display: block;
+
+  @media only screen and (max-width: 1024px) {
+    width: 15px;
+    height: 15px;
+  }
 `;
 
 function MegaMenu() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const toggleMobileOpen = useCallback(() => {
+    setMobileOpen(!mobileOpen)
+  },[mobileOpen])
+  
+
   return (
     <MegaWrapper>
       <MegaContainer>
+        <ToggleMegaNav onClick={toggleMobileOpen}>
+          <FontAwesomeIcon icon={faBars} size="lg"/>
+        </ToggleMegaNav>
         <MegaNav>
-          <MegaList>
+          <MegaList active={mobileOpen}>
             <MegaItem>
               Todas as Categorias
-              <FontAwesomeIcon icon={faAngleDown} size="lg" color="#71717A" />
+              <FontAwesomeIcon icon={faAngleDown} size="lg"/>
             </MegaItem>
             <MegaItem>
               Óleos e Lubrificantes
-              <FontAwesomeIcon icon={faAngleDown} size="lg" color="#71717A" />
+              <FontAwesomeIcon icon={faAngleDown} size="lg"/>
             </MegaItem>
             <MegaItem>
               Pneus
-              <FontAwesomeIcon icon={faAngleDown} size="lg" color="#71717A" />
+              <FontAwesomeIcon icon={faAngleDown} size="lg"/>
             </MegaItem>
             <MegaItem>
               Maquinários
-              <FontAwesomeIcon icon={faAngleDown} size="lg" color="#71717A" />
+              <FontAwesomeIcon icon={faAngleDown} size="lg"/>
             </MegaItem>
             <MegaItem>
               Ferramentas
-              <FontAwesomeIcon icon={faAngleDown} size="lg" color="#71717A" />
+              <FontAwesomeIcon icon={faAngleDown} size="lg"/>
             </MegaItem>
           </MegaList>
         </MegaNav>
