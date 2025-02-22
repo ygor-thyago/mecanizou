@@ -11,12 +11,9 @@ const loadCart = (): MiniCartState => {
     const storedCart = localStorage.getItem(STORAGE_KEY);
     if (storedCart) {
       const parsedCart = JSON.parse(storedCart);
-      const now = new Date().getTime();
 
       // If the cart was saved less than 5 minutes ago, return the data
-      if (now - parsedCart.timestamp < EXPIRATION_TIME) {
-        return parsedCart.data;
-      }
+      if (Date.now() - parsedCart.timestamp < EXPIRATION_TIME) return parsedCart.data;
     }
   } catch (error) {
     console.error("Erro ao carregar o carrinho:", error);
@@ -25,16 +22,19 @@ const loadCart = (): MiniCartState => {
 };
 
 // Save cart data on localStorage 
-const saveCart = (MiniCartState: MiniCartState) => {
+const saveCart = (state: MiniCartState) => {
   try {
-    const dataToStore = {
-      data: MiniCartState,
-      timestamp: new Date().getTime(),
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToStore));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ data: state, timestamp: Date.now() }));
   } catch (error) {
     console.error("Erro ao salvar o carrinho:", error);
   }
+};
+
+const updateCartState = (state: MiniCartState) => {
+  state.totalAmount = state.items.reduce((total, item) => total + item.price * item.quantity, 0);
+  state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
+  state.isMiniCartOpen = true;
+  saveCart(state); // Save Cart data on localStorage
 };
 
 const initialState: MiniCartState = loadCart();
@@ -43,45 +43,31 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItem:  (state, action: PayloadAction<CartItem>) => {
+    addItem: (state, action: PayloadAction<CartItem>) => {
       const product = action.payload;
       const existingItem = state.items.find((item) => item.id === product.id);
-
+      
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity++;
       } else {
         state.items.push({ ...product, quantity: 1 });
       }
 
-      state.totalAmount = state.items.reduce((total, item) => total + item.price * item.quantity, 0);
-      state.isMiniCartOpen = true;
-      state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
-
-      saveCart(state); // Save Cart data on localStorage
+      updateCartState(state);
     },
     removeItem: (state, action: PayloadAction<CartItem>) => {
       const product = action.payload;
       state.items = state.items.filter((item) => item.id !== product.id);
-      
-      state.totalAmount = state.items.reduce((total, item) => total + item.price * item.quantity, 0);
-      state.isMiniCartOpen = true;
-      state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
-
-      saveCart(state); // Save Cart data on localStorage
+      updateCartState(state);
     },
-    updateQuantity:  (state, action: PayloadAction<CartItem>) => {
+    updateQuantity: (state, action: PayloadAction<CartItem>) => {
       const product = action.payload;
       const existingItem = state.items.find((item) => item.id === product.id);
 
       if (existingItem) {
         existingItem.quantity = product.quantity;
       }
-
-      state.totalAmount = state.items.reduce((total, item) => total + item.price * item.quantity, 0);
-      state.isMiniCartOpen = true;
-      state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
-
-      saveCart(state); // Save Cart data on localStorage
+      updateCartState(state);
     },
     toggleMiniCart: (state, action: PayloadAction<boolean>) => {
       state.isMiniCartOpen = action.payload;
@@ -90,10 +76,8 @@ const cartSlice = createSlice({
   },
 });
 
-export const selectProductQuantity = (productId: number) => (state: RootState) => {
-  const product = state.cart.items.find((item) => item.id === productId);
-  return product ? product.quantity : 0;
-};
+export const selectProductQuantity = (productId: number) => (state: RootState) =>
+  state.cart.items.find((item) => item.id === productId)?.quantity || 0;
 
 export const { addItem, removeItem, updateQuantity, toggleMiniCart } = cartSlice.actions;
 export default cartSlice.reducer;

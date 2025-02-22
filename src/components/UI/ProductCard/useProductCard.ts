@@ -11,7 +11,7 @@ export const useProductCard = (product: Product) => {
   const [discountPrice, setDiscountPrice] = useState<number>();
   const [discountPriceDec, setDiscountPriceDec] = useState<number>();
   const [installmentPrice, setInstallmentPrice] = useState<string>();
-  const [productQuantity, setProductQuantity] = useState<number>(quantity);
+  const [productQuantity, setProductQuantity] = useState<string>(quantity.toString());
 
   useEffect(() => {
     if (product.price) {
@@ -35,8 +35,9 @@ export const useProductCard = (product: Product) => {
   
   const handleAddToCart = useCallback(() => {
       const addProduct = Object.assign(product);
+      const newQuantity = productQuantity !== null ? parseInt(productQuantity) + 1 : 1;
       dispatch(addItem(addProduct));
-      setProductQuantity(productQuantity + 1)
+      setProductQuantity(newQuantity.toString())
     },
     [dispatch, product, productQuantity]
   );
@@ -44,21 +45,20 @@ export const useProductCard = (product: Product) => {
   const handleRemoveToCart = useCallback(() => {
       const addProduct = Object.assign(product);
       dispatch(removeItem(addProduct));
-      setProductQuantity(0)
+      setProductQuantity('0')
     },
     [dispatch, product]
   );
 
   const handleUpdateQuantity = useCallback((element: React.FormEvent<HTMLInputElement>) => {
       const newQuantity = parseInt(element.currentTarget.value)
-      const addProduct = Object.assign(product, { quantity: newQuantity });
+      const addProduct = { ...product, quantity: newQuantity};
 
-      if (newQuantity === null || newQuantity === 0) {
-        dispatch(removeItem(addProduct));
+      if (!isNaN(newQuantity)) {
+        dispatch(newQuantity === 0 ? removeItem(addProduct) : dispatch(updateQuantity(addProduct)));
       }
 
-      dispatch(updateQuantity(addProduct));
-      setProductQuantity(newQuantity)
+      setProductQuantity(newQuantity.toString())
     },
     [dispatch, product]
   );
