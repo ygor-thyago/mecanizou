@@ -10,7 +10,5 @@ export interface MiniCartState {
   items: CartItem[];
   totalAmount: number;
   isMiniCartOpen: boolean;
+  totalItems: number;
 }
-
-// export interface MiniCartProps {
-// }

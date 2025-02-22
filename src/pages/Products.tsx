@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ContentLoader from "react-content-loader"
-import Container from "../components/Container";
-import Breadcrumb from "../components/Breadcrumb";
+import Container from "../components/Layout/Container";
+import Breadcrumb from "../components/Layout/Breadcrumb";
 import ProductCard from "../components/UI/ProductCard";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/Layout/Pagination";
 
 interface Product {
   id: number;

@@ -1,16 +1,12 @@
 import styled from "styled-components";
-import { useCallback, useState } from "react";
-import Container from "../components/Container";
-import quickQuoteIcon from "../assets/quick-quote-icon.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faBars } from "@fortawesome/free-solid-svg-icons";
+import Container from "../Container";
 
-const MegaWrapper = styled.div`
+export const MegaWrapper = styled.div`
   width: 100%;
   background: #fff;
 `;
 
-const MegaContainer = styled(Container)`
+export const MegaContainer = styled(Container)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,7 +21,7 @@ const MegaContainer = styled(Container)`
   }
 `;
 
-const ToggleMegaNav = styled.button`
+export const ToggleMegaNav = styled.button`
   display: none;
   color: #52525b;
 
@@ -34,7 +30,7 @@ const ToggleMegaNav = styled.button`
   }
 `;
 
-const MegaNav = styled.nav`
+export const MegaNav = styled.nav`
   width: 80%;
   max-width: 700px;
   @media only screen and (max-width: 768px) {
@@ -42,7 +38,7 @@ const MegaNav = styled.nav`
   }
 `;
 
-const MegaList = styled.ul<{ $isActive?: boolean }>`
+export const MegaList = styled.ul<{ $isActive?: boolean }>`
   display: flex;
   align-items: center;
   gap: 24px;
@@ -71,7 +67,7 @@ const MegaList = styled.ul<{ $isActive?: boolean }>`
   }
 `;
 
-const MegaItem = styled.li`
+export const MegaItem = styled.li`
   color: #52525b;
   font-family: Inter;
   font-size: 14px;
@@ -97,7 +93,7 @@ const MegaItem = styled.li`
   }
 `;
 
-const QuickQuote = styled.button`
+export const QuickQuote = styled.button`
   width: 181px;
   height: 40px;
   display: flex;
@@ -116,7 +112,7 @@ const QuickQuote = styled.button`
   }
 `;
 
-const QuoteIcon = styled.img`
+export const QuoteIcon = styled.img`
   width: 20px;
   height: 20px;
   display: block;
@@ -126,52 +122,3 @@ const QuoteIcon = styled.img`
     height: 15px;
   }
 `;
-
-function MegaMenu() {
-  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
-
-  const toggleMobileOpen = useCallback(() => {
-    setMobileOpen(!mobileOpen)
-  },[mobileOpen])
-  
-
-  return (
-    <MegaWrapper>
-      <MegaContainer>
-        <ToggleMegaNav onClick={toggleMobileOpen}>
-          <FontAwesomeIcon icon={faBars} size="lg"/>
-        </ToggleMegaNav>
-        <MegaNav>
-          <MegaList $isActive={mobileOpen}>
-            <MegaItem>
-              Todas as Categorias
-              <FontAwesomeIcon icon={faAngleDown} size="lg"/>
-            </MegaItem>
-            <MegaItem>
-              Óleos e Lubrificantes
-              <FontAwesomeIcon icon={faAngleDown} size="lg"/>
-            </MegaItem>
-            <MegaItem>
-              Pneus
-              <FontAwesomeIcon icon={faAngleDown} size="lg"/>
-            </MegaItem>
-            <MegaItem>
-              Maquinários
-              <FontAwesomeIcon icon={faAngleDown} size="lg"/>
-            </MegaItem>
-            <MegaItem>
-              Ferramentas
-              <FontAwesomeIcon icon={faAngleDown} size="lg"/>
-            </MegaItem>
-          </MegaList>
-        </MegaNav>
-        <QuickQuote>
-          <QuoteIcon src={quickQuoteIcon} alt="Ícone de Orçamento" />
-          Orçamento Rápido
-        </QuickQuote>
-      </MegaContainer>
-    </MegaWrapper>
-  );
-}
-
-export default MegaMenu;

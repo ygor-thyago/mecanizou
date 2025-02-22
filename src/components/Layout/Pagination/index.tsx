@@ -1,42 +1,12 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { PaginationProps } from "./types";
 
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}
-
-const PaginationWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  @media only screen and (max-width: 768px) {
-    gap: 4px;
-  }
-`;
-
-const PageButton = styled.button<{ $isActive?: boolean; disabled?: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  border-radius: 6px;
-  color: ${({ disabled }) => (disabled ? "#A1A1AA" : "#3F3F46")};
-  font-size: 14px;
-  font-weight: 500;
-  padding: 8px 12px;
-  border: ${({ $isActive }) => ($isActive ? "1px solid #E4E4E7" : "none")};
-  cursor: pointer;
-
-  @media only screen and (max-width: 768px) {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-`;
+import { 
+  PaginationWrapper,
+  PageButton,
+ } from "./styles";
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,

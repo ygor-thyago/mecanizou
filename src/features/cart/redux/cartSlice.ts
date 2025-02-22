@@ -1,26 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store";
-
-export interface CartItem {
-  image: string;
-  id: number;
-  title: string;
-  price: number;
-  quantity: number;
-}
-
-export interface CartState {
-  items: CartItem[];
-  totalAmount: number;
-  isMiniCartOpen: boolean;
-  totalItems: number;
-}
+import { CartItem, MiniCartState } from "../components/MiniCart/types";
 
 const STORAGE_KEY = "cart";
 const EXPIRATION_TIME = 5 * 60 * 1000;
 
 // Load localStorage cart data
-const loadCart = (): CartState => {
+const loadCart = (): MiniCartState => {
   try {
     const storedCart = localStorage.getItem(STORAGE_KEY);
     if (storedCart) {
@@ -39,10 +25,10 @@ const loadCart = (): CartState => {
 };
 
 // Save cart data on localStorage 
-const saveCart = (cartState: CartState) => {
+const saveCart = (MiniCartState: MiniCartState) => {
   try {
     const dataToStore = {
-      data: cartState,
+      data: MiniCartState,
       timestamp: new Date().getTime(),
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToStore));
@@ -51,7 +37,7 @@ const saveCart = (cartState: CartState) => {
   }
 };
 
-const initialState: CartState = loadCart();
+const initialState: MiniCartState = loadCart();
 
 const cartSlice = createSlice({
   name: "cart",
