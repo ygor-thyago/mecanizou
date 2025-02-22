@@ -16,8 +16,8 @@ describe('MiniCart Component', () => {
       cart: {
         isMiniCartOpen: true,
         items: [
-          { id: 1, title: 'Produto 1', price: 100, quantity: 1, image: 'img1.png' },
-          { id: 2, title: 'Produto 2', price: 200, quantity: 2, image: 'img2.png' },
+          { id: 1, title: 'Produto 1', price: 100, quantity: 1, image: 'img1.png', category: "Categoria Teste" },
+          { id: 2, title: 'Produto 2', price: 200, quantity: 2, image: 'img2.png', category: "Categoria Teste" },
         ],
         totalAmount: 500,
         totalItems: 3,
