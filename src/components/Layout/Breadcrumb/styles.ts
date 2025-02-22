@@ -14,14 +14,17 @@ export const BreadcrumbWrapper = styled.nav`
 export const BreadcrumbItem = styled.span<{ $isLast?: boolean }>`
   display: flex;
   align-items: center;
+  color: ${({ theme }) => theme.colors.textGrey};
   a {
     text-decoration: none;
-    color: #71717A;
+    color: ${({ theme }) => theme.colors.textGrey};
     &:hover {
       text-decoration: underline;
     }
   }
-  ${({ $isLast }) => $isLast && "font-weight: bold; color: #27272A;"}
+
+  font-weight: ${({ $isLast }) => ($isLast ? "bold" : "")};
+  color: ${({ $isLast }) => ($isLast ? ({ theme }) => theme.colors.textGrey : "")};
 `;
 
 export const Separator = styled.span`

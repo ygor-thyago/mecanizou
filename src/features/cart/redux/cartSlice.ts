@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store";
-import { CartItem, MiniCartState } from "../components/MiniCart/types";
+import { CartItem, MiniCartState } from "../../../types";
 
 const STORAGE_KEY = "cart";
 const EXPIRATION_TIME = 5 * 60 * 1000;

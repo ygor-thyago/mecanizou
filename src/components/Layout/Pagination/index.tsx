@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { PaginationProps } from "./types";
+import { PaginationProps } from "../../../types";
 
 import { 
   PaginationWrapper,
   PageButton,
- } from "./styles";
+} from "./styles";
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,

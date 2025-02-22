@@ -4,7 +4,7 @@ export const SearchBox = styled.div`
   width: 55%;
   max-width: 620px;
   display: flex;
-  background: #0378f23d;
+  background: ${({ theme }) => theme.colors.headBackground};
   border-radius: 9.6px;
 
   @media only screen and (max-width: 768px) {
@@ -29,7 +29,7 @@ export const SearchIcon = styled.img`
 
 export const SearchInput = styled.input<{ $isActive?: boolean }>`
   width: calc(100% - 48px);
-  color: #fff;
+  color: ${({ theme }) => theme.colors.white};
   font-family: Inter;
   font-weight: 400;
   font-size: 16px;

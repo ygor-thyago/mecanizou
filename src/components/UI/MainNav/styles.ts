@@ -24,9 +24,10 @@ export const CartMenu = styled.div`
   width: 68px;
   height: 40px;
   border-radius: 40px;
-  background: #0378f23d;
+  background: ${({ theme }) => theme.colors.headBackground};
   padding: 0 18px 0 11px;
   position: relative;
+  cursor: pointer;
 `;
 
 export const MainIcon = styled.img`
@@ -35,7 +36,7 @@ export const MainIcon = styled.img`
 `;
 
 export const MainCartText = styled.span`
-  color: #e4e4e7;
+  color: ${({ theme }) => theme.colors.grey};
   font-size: 14px;
   line-height: 23.8px;
   text-align: center;
@@ -53,4 +54,5 @@ export const UserMenu = styled.div`
   justify-content: space-between;
   gap: 8px;
   padding: 10px 12px;
+  color: ${({ theme }) => theme.colors.grey};
 `;

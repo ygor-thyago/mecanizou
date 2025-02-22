@@ -29,7 +29,7 @@ function MainNav() {
       <UserMenu>
         <MainIcon src={userIcon} alt="Ícone do Menu da Oficina" />
         <MainNavText>Minha Oficina</MainNavText>
-        <FontAwesomeIcon icon={faAngleDown} size="sm" color="#E4E4E7" />
+        <FontAwesomeIcon icon={faAngleDown} size="sm" />
       </UserMenu>
     </MainWrapper>
   );

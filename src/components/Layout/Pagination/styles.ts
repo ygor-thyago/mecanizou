@@ -16,7 +16,7 @@ export const PageButton = styled.button<{ $isActive?: boolean; disabled?: boolea
   align-items: center;
   gap: 15px;
   border-radius: 6px;
-  color: ${({ disabled }) => (disabled ? "#A1A1AA" : "#3F3F46")};
+  color: ${({ disabled }) => (disabled ? "#A1A1AA" : ({ theme }) => theme.colors.textSecondary)};
   font-size: 14px;
   font-weight: 500;
   padding: 8px 12px;

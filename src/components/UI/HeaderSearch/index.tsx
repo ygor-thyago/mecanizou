@@ -6,7 +6,7 @@ import {
   SearchButton,
   SearchIcon,
   SearchInput,
- } from "./styles";
+} from "./styles";
 
 function HeaderSearch() {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);

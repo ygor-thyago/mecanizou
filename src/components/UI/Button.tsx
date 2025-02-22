@@ -7,7 +7,7 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  color: #0958B5;
+  color: ${({ theme }) => theme.colors.primary};
   font-weight: 600;
   font-size: 14px;
   line-height: 23.8px;

@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectProductQuantity, addItem, removeItem, updateQuantity } from "../../../features/cart/redux/cartSlice";
 import { useCallback, useEffect, useState } from "react";
-import { ProductCardProps } from "./types";
+import { Product } from "../../../types";
 
-export const useProductCard = ({ product }: ProductCardProps) => {
+
+export const useProductCard = (product: Product) => {
   // Get cart item quantity
   const quantity = useSelector(selectProductQuantity(product.id));
 
@@ -33,7 +34,7 @@ export const useProductCard = ({ product }: ProductCardProps) => {
   const dispatch = useDispatch();
   
   const handleAddToCart = useCallback(() => {
-      const addProduct = Object.assign(product, { quantity: 1 });
+      const addProduct = Object.assign(product);
       dispatch(addItem(addProduct));
       setProductQuantity(productQuantity + 1)
     },
@@ -41,7 +42,7 @@ export const useProductCard = ({ product }: ProductCardProps) => {
   );
 
   const handleRemoveToCart = useCallback(() => {
-      const addProduct = Object.assign(product, { quantity: 1 });
+      const addProduct = Object.assign(product);
       dispatch(removeItem(addProduct));
       setProductQuantity(0)
     },

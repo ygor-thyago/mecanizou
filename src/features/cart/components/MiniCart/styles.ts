@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-
+import { rgba } from "polished";
 
 export const MiniCartWrapper = styled.div<{ $isActive?: boolean }>`
   top: 48px;
@@ -12,7 +12,7 @@ export const MiniCartWrapper = styled.div<{ $isActive?: boolean }>`
     content: "";
     width: 20px;
     height: 20px;
-    background: #FFF;
+    background: ${({ theme }) => theme.colors.white};
     position: absolute;
     left: 29px;
     top: -5px;
@@ -41,7 +41,7 @@ export const MiniCartWrapper = styled.div<{ $isActive?: boolean }>`
     right: auto;
     left: ${({ $isActive }) => ($isActive ? "0" : "-150%")};
     transition: all linear .3s;
-    background-color: #FFF;
+    background-color: ${({ theme }) => theme.colors.white};
     
     &::before {display: none;}
   }
@@ -49,9 +49,9 @@ export const MiniCartWrapper = styled.div<{ $isActive?: boolean }>`
 
 export const MiniCartContainer = styled(motion.div)`
   width: 304px;
-  background: #FFF;
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 12px;
-  box-shadow: 0px 10px 12px -6px #0000001F;
+  box-shadow: 0px 10px 12px -6px ${({ theme }) => rgba(theme.colors.black, 0.12)};
   display: flex;
   flex-direction: column;
   clip-path: inset(10% 50% 90% round 10px);
@@ -68,14 +68,14 @@ export const CartHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  color: #27272A73;
+  color: ${({ theme }) => rgba(theme.colors.textDark, 0.85)};
   font-size: 14px;
   font-weight: 500;
   line-height: 19.6px;
 
   strong {
     font-weight: 600;
-    color: #27272A;
+    color: ${({ theme }) => theme.colors.textDark};
   }
   
   @media only screen and (max-width: 768px) {
@@ -90,7 +90,7 @@ export const CartHeader = styled.div`
 `;
 
 export const CartList = styled.ul`
-  color: #52525BD9;
+  color: ${({ theme }) => rgba(theme.colors.text, 0.85)};
   font-size: 14px;
   font-weight: 600;
   line-height: 19.6px;
@@ -111,7 +111,7 @@ export const CartItem = styled(motion.li)`
   }
 
   small {
-    color: #52525B;
+    color: ${({ theme }) => theme.colors.text};
     font-size: 12px;
     line-height: 15.6px;
     opacity: .85;
@@ -134,7 +134,7 @@ export const CartItemInfo = styled.div`
   }
 
   small {
-    color: #52525B;
+    color: ${({ theme }) => theme.colors.text};
     font-size: 12px;
     line-height: 15.6px;
     opacity: .85;
@@ -152,7 +152,7 @@ export const ProductImage = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  background: #F4F4F5;
+  background: ${({ theme }) => theme.colors.secondary};
 
   img {
     max-width: 80%;
@@ -163,13 +163,13 @@ export const ProductImage = styled.div`
 export const CartFooter = styled.div`
   padding: 15px;
   text-align: center;
-  border-top: 1px solid #F4F4F5;
+  border-top: 1px solid ${({ theme }) => theme.colors.secondary};
 
   a {
     font-weight: 500;
     font-size: 14px;
     line-height: 24px;
-    color: #0958B5;
+    color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -185,7 +185,7 @@ export const MiniCartIcon = styled.img`
 
 export const CloseMobileCart = styled.button`
   display: none;
-  color: #52525b;
+  color: ${({ theme }) => theme.colors.text};
 
   @media only screen and (max-width: 768px) {
     display: block;

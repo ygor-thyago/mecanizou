@@ -1,11 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useProductCard } from "./useProductCard";
-import { ProductCardProps } from "./types";
-import { faBolt, faTrashCan, faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Product } from "../../../types";
+import {
+  faBolt,
+  faTrashCan,
+  faCartShopping,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import cartArrowDown from "../../../assets/cart-arrow-down.svg";
 import Button from "../Button";
 
-import { 
+import {
   ProductWrapper,
   ProductImageWrapper,
   ProductBadge,
@@ -21,10 +26,8 @@ import {
   QuantityInputWrapper,
 } from "./styles";
 
-
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-
-  const { 
+const ProductCard: React.FC<Product> = (product) => {
+  const {
     discountPrice,
     discountPriceDec,
     installmentPrice,
@@ -33,13 +36,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     handleUpdateQuantity,
     productQuantity,
     quantity,
-   } = useProductCard({product});
+  } = useProductCard(product);
 
   return (
     <ProductWrapper>
       <ProductImageWrapper>
         <ProductBadge>
-          <FontAwesomeIcon icon={faBolt} size="1x" color="#FAFAFA" />
+          <FontAwesomeIcon icon={faBolt} size="1x" />
           Express
         </ProductBadge>
         <img src={product.image} alt={product.title} width="100" />
@@ -52,7 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <ProductPriceWrapper>
         <ProductPriceBox>
           <p>
-            <s>R$ {product.price.toFixed(2).replace(".", ",")}</s>
+            <s>R$ {product.price?.toFixed(2).replace(".", ",")}</s>
           </p>
           <ProdDiscountPrice>
             R$ {discountPrice}
@@ -62,7 +65,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </ProductPriceBox>
         <ProdDiscountTag>5% OFF NO PIX</ProdDiscountTag>
       </ProductPriceWrapper>
-      
+
       {quantity > 0 ? (
         <ProductQuantityWrapper>
           <button onClick={handleRemoveToCart}>
@@ -70,7 +73,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </button>
           <QuantityInputWrapper>
             <FontAwesomeIcon icon={faCartShopping} size="1x" />
-            <input type="number" value={productQuantity} onChange={handleUpdateQuantity} />
+            <input
+              type="number"
+              value={productQuantity}
+              onChange={handleUpdateQuantity}
+            />
           </QuantityInputWrapper>
           <button onClick={handleAddToCart}>
             <FontAwesomeIcon icon={faPlus} size="1x" />

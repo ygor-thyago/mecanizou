@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: #FAFAFA;
+    background-color: ${({ theme }) => theme.colors.ice};
     color: ${({ theme }) => theme.colors.text};
   }
 

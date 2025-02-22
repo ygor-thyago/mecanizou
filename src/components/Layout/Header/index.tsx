@@ -10,7 +10,7 @@ import {
   LogoWrapper,
   Logo,
   HelpIcon,
- } from "./styles";
+} from "./styles";
 
 function Header() {
   return (

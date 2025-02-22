@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { rgba } from "polished";
 
 export const ProductWrapper = styled.div`
   max-width: 271px;
@@ -11,14 +12,14 @@ export const ProductImageWrapper = styled.div`
   width: 100%;
   height: 271px;
   border-radius: 12px;
-  background: #f4f4f5;
+  background: ${({ theme }) => theme.colors.secondary};
   position: relative;
 `;
 
 export const ProductBadge = styled.p`
   width: 89px;
   height: 24px;
-  color: #fafafa;
+  color: ${({ theme }) => theme.colors.ice};
   font-weight: 700;
   font-style: italic;
   font-size: 12px;
@@ -40,7 +41,7 @@ export const ProductInfo = styled.div`
 `;
 
 export const ProductBrand = styled.h3`
-  color: #0958b5;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 12px;
   font-weight: 500;
   line-height: 15.6px;
@@ -50,7 +51,7 @@ export const ProductBrand = styled.h3`
 `;
 
 export const ProductTitle = styled.h2`
-  color: #52525b;
+  color: ${({ theme }) => theme.colors.text};
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
@@ -60,7 +61,7 @@ export const ProductTitle = styled.h2`
 `;
 
 export const ProductCod = styled.p`
-  color: #52525b;
+  color: ${({ theme }) => theme.colors.text};
   font-size: 12px;
   line-height: 15.6px;
   margin-top: 4px;
@@ -73,14 +74,14 @@ export const ProductPriceWrapper = styled.div`
 `;
 
 export const ProductPriceBox = styled.div`
-  color: #52525ba6;
+  color: ${({ theme }) => rgba(theme.colors.text, 0.65)};
   font-size: 12px;
   line-height: 15.6px;
   margin-top: 14px;
 `;
 
 export const ProdDiscountPrice = styled.p`
-  color: #52525b;
+  color: ${({ theme }) => theme.colors.text};
   font-weight: 600;
   font-size: 22px;
   line-height: 33px;
@@ -102,7 +103,7 @@ export const ProdDiscountTag = styled.p`
   line-height: 15.6px;
   text-align: center;
   color: #1e5d2da6;
-  background: #dff9e4;
+  background: ${({ theme }) => theme.colors.prodBackground};
   margin-top: 12px;
   padding-top: 5px;
   position: relative;
@@ -112,7 +113,7 @@ export const ProdDiscountTag = styled.p`
     content: "";
     width: 20px;
     height: 20px;
-    background: #dff9e4;
+    background: ${({ theme }) => theme.colors.prodBackground};
     position: absolute;
     left: 4px;
     top: 50%;
@@ -126,7 +127,7 @@ export const ProdDiscountTag = styled.p`
     content: "";
     width: 4px;
     height: 4px;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.white};
     position: absolute;
     left: -8px;
     top: 10px;
@@ -135,18 +136,18 @@ export const ProdDiscountTag = styled.p`
 `;
 
 export const ProductQuantityWrapper = styled.div`
-  color: #3F3F46;
+  color: ${({ theme }) => theme.colors.textSecondary};
   display: flex;
   gap: 6px;
   align-items: center;
   justify-content: space-between;
-  background: #F4F4F5;
+  background: ${({ theme }) => theme.colors.secondary};
   border-radius: 40px;
   padding: 4px 14px;
   margin-top: 12px;
 
   button {
-    color: #3F3F46;
+    color: ${({ theme }) => theme.colors.textSecondary};
   }
 `;
 
@@ -156,14 +157,14 @@ export const QuantityInputWrapper = styled.div`
   justify-content: center;
   width: 100%;
   max-width: 183px;
-  background: #FFFFFF;
+  background: ${({ theme }) => theme.colors.white};
   border: none;
   padding: 8px 0;
   border-radius: 24px;
 
   input {
     max-width: 25px;
-    color: #52525B;
+    color: ${({ theme }) => theme.colors.text};
     text-align: center;
     &::-webkit-inner-spin-button, &::-webkit-outer-spin-button { 
       -webkit-appearance: none;
