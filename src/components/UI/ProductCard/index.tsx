@@ -84,7 +84,12 @@ const ProductCard: React.FC<Product> = (product) => {
           </button>
         </ProductQuantityWrapper>
       ) : (
-        <Button onClick={quantity > 3 ? handleRemoveToCart : handleAddToCart}>
+        <Button
+          onClick={quantity > 3 ? handleRemoveToCart : handleAddToCart}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
           <img src={cartArrowDown} alt="" />
           {"Adicionar ao Carrinho"}
         </Button>

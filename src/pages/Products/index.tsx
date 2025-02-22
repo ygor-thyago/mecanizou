@@ -6,6 +6,7 @@ import Breadcrumb from "../../components/Layout/Breadcrumb";
 import ProductCard from "../../components/UI/ProductCard";
 import Pagination from "../../components/Layout/Pagination";
 import { Product } from "../../types";
+import { motion } from "framer-motion";
 
 import {
   ProductListHead,
@@ -60,7 +61,7 @@ function Products() {
         {!error ? (<ProductListNumb>12 de 9.999 resultados</ProductListNumb>) : ''}
       </ProductListHead>
       {error ? (
-        <ErrorTitle>Tivemos um problema, tente novamente ou retorne mais tarde.</ErrorTitle>
+        <ErrorTitle>{error}</ErrorTitle>
       ) : (
         <>
         <ProductList>
@@ -88,12 +89,28 @@ function Products() {
               </ContentLoader>
             ))
           ) : (
-            products.map((product) => (
-              <ProductCard key={product.id} {...product} />
+            products.map((product, index) => (
+              <motion.div
+                key={product.id}
+                custom={index}
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: { opacity: 0, scale: 0.3, filter: "blur(20px)" },
+                  visible: (i) => ({
+                    opacity: 1,
+                    scale: 1,
+                    filter: "blur(0px)",
+                    transition: { duration: 0.2, delay: i * 0.1 },
+                  }),
+                }}
+              >
+                <ProductCard {...product} />
+              </motion.div>
             ))
           )}
         </ProductList>
-
+        
         <ProductListFooter>
           <Pagination
             currentPage={currentPage}
