@@ -7,6 +7,9 @@ export const MiniCartWrapper = styled.div<{ $isActive?: boolean }>`
   left: 5px;
   position: absolute;
   z-index: 1000;
+  visibility: ${({ $isActive }) => ($isActive ? "visible" : "hidden")};
+  transition: all linear ${({ $isActive }) => ($isActive ? ".2s" : "0s")};
+  transition-delay: ${({ $isActive }) => ($isActive ? ".3s" : "0s")};
 
   &::before {
     content: "";
@@ -20,8 +23,6 @@ export const MiniCartWrapper = styled.div<{ $isActive?: boolean }>`
     transform-origin: top;
     border-radius: 2px;
     z-index: -1;
-    transition: all linear ${({ $isActive }) => ($isActive ? ".2s" : "0s")};
-    transition-delay: ${({ $isActive }) => ($isActive ? ".3s" : "0s")};
     opacity: ${({ $isActive }) => ($isActive ? "1" : "0")};
   }
 

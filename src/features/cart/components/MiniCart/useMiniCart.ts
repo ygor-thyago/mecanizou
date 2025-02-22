@@ -27,6 +27,9 @@ export const useMiniCart = () => {
         clipPath: isMiniCartOpen
           ? "inset(0% 0% 0% 0% round 10px)"
           : "inset(10% 50% 90% 50% round 10px)",
+        visibility:  isMiniCartOpen
+        ? "visible"
+        : "hidden",
       },
       {
         type: "spring",

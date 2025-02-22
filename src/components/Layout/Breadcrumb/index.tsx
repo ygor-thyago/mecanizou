@@ -14,7 +14,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
     <BreadcrumbWrapper>
       {items.map((item, index) => (
         <BreadcrumbItem key={index} $isLast={index === items.length - 1}>
-          {item.link ? <Link to={item.link}>{item.label}</Link> : item.label}
+          {item.link ? <Link onClick={(e) => {e.preventDefault()}} to={item.link}>{item.label}</Link> : item.label}
           {index < items.length - 1 && <Separator><FontAwesomeIcon icon={faAngleRight} size="2xs" /></Separator>}
         </BreadcrumbItem>
       ))}
